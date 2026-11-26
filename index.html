@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kuis Fisika Dasar – Pertemuan 10: Momentum dan Impuls</title>
+<style>
+:root{--navy:#1f2a7a;--navy2:#141b57;--org:#f28c1a;--bg:#eef1f8;--ok:#1b8a4b;--no:#c62828;--ink:#1c2233}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+header{background:linear-gradient(135deg,var(--navy2),var(--navy));color:#fff;padding:18px 16px;text-align:center;border-bottom:4px solid var(--org)}
+header h1{margin:0;font-size:1.3rem}header p{margin:4px 0 0;font-size:.9rem;opacity:.85}
+main{max-width:820px;margin:18px auto;padding:0 14px}
+.card{background:#fff;border-radius:12px;padding:20px;box-shadow:0 2px 10px rgba(20,27,87,.1);margin-bottom:16px}
+label{display:block;font-weight:600;margin:12px 0 4px}
+input,select{width:100%;padding:10px 12px;border:1.5px solid #b8c0dc;border-radius:8px;font-size:1rem;font-family:inherit}
+input:focus,select:focus{outline:none;border-color:var(--navy)}
+button{font-family:inherit;font-size:1rem;cursor:pointer;border:0;border-radius:8px;padding:10px 18px;font-weight:600}
+.pri{background:var(--navy);color:#fff}.pri:hover{background:var(--navy2)}
+.sec{background:#e3e7f5;color:var(--navy)}.org{background:var(--org);color:#fff}
+button:disabled{opacity:.4;cursor:not-allowed}
+.err{color:var(--no);font-size:.9rem;margin-top:8px;min-height:1.2em}
+.note{background:#fff6e5;border-left:4px solid var(--org);padding:10px 12px;border-radius:6px;font-size:.92rem;margin-top:14px}
+.bar{height:8px;background:#dde2f3;border-radius:6px;overflow:hidden;margin:6px 0 12px}
+.bar i{display:block;height:100%;background:var(--org);width:0;transition:width .25s}
+.meta{display:flex;justify-content:space-between;font-size:.9rem;color:#555}
+.q{font-size:1.1rem;font-weight:600;margin:10px 0 14px}
+.opt{display:block;width:100%;text-align:left;background:#f6f8fe;border:2px solid #d3d9ef;margin-bottom:9px;padding:11px 14px;font-weight:500}
+.opt:hover{border-color:var(--navy)}.opt.sel{background:#e0e6ff;border-color:var(--navy);font-weight:600}
+.nav{display:flex;gap:8px;justify-content:space-between;margin-top:12px;flex-wrap:wrap}
+.grid{display:grid;grid-template-columns:repeat(10,1fr);gap:5px;margin-top:14px}
+.grid button{padding:6px 0;font-size:.85rem;background:#e3e7f5;color:var(--navy)}
+.grid button.done{background:var(--navy);color:#fff}.grid button.now{outline:3px solid var(--org)}
+.score{text-align:center}.score .big{font-size:3.4rem;font-weight:800;color:var(--navy);line-height:1}
+.score .lbl{display:inline-block;margin-top:8px;padding:4px 14px;border-radius:20px;background:var(--org);color:#fff;font-weight:700}
+table.id{width:100%;border-collapse:collapse;margin-bottom:10px}table.id td{padding:5px 8px;border-bottom:1px solid #e1e5f3}table.id td:first-child{width:150px;font-weight:600;color:var(--navy)}
+.stats{display:flex;gap:10px;justify-content:center;margin:14px 0;flex-wrap:wrap}
+.stats div{background:#f2f4fb;border-radius:8px;padding:8px 18px;text-align:center}.stats b{display:block;font-size:1.4rem}
+.rv{border:1px solid #d7dcef;border-radius:10px;padding:12px 14px;margin-bottom:10px;break-inside:avoid;page-break-inside:avoid}
+.rv.ok{border-left:6px solid var(--ok)}.rv.no{border-left:6px solid var(--no)}
+.rv .t{font-weight:600}.rv .a{font-size:.95rem;margin:2px 0}
+.tag{font-weight:700}.ok .tag{color:var(--ok)}.no .tag{color:var(--no)}
+.exp{background:#eef2ff;border-radius:6px;padding:8px 10px;margin-top:6px;font-size:.93rem}
+.hide{display:none}
+@media(max-width:560px){.grid{grid-template-columns:repeat(6,1fr)}}
+@media print{
+ body{background:#fff}.noprint{display:none!important}
+ .card{box-shadow:none;border:0;padding:0}header{padding:8px;background:#fff!important;color:var(--navy);border-bottom:3px solid var(--org)}
+ header *{color:var(--navy)!important}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<header class="">
+<h1>KUIS FISIKA DASAR – Pertemuan 10</h1>
+<p>Momentum dan Impuls · Program Studi Teknik Industri · Universitas Bina Sarana Informatika</p>
+</header>
+<main>
+
+<section id="start" class="card noprint-wrap">
+<h2 style="margin-top:0;color:var(--navy)">Identitas Mahasiswa</h2>
+<label for="nama">Nama Lengkap</label><input id="nama" placeholder="Masukkan nama lengkap" autocomplete="name">
+<label for="nim">NIM</label><input id="nim" placeholder="Masukkan NIM" inputmode="numeric" autocomplete="off">
+<label for="prodi">Program Studi</label>
+<select id="prodi">
+<option>Teknik Industri</option><option>Teknologi Komputer</option><option>Teknik Informatika</option><option>Sistem Informasi</option><option>Manajemen</option><option>Akuntansi</option><option>Lainnya</option>
+</select>
+<div class="err" id="err"></div>
+<button class="pri" id="go" style="width:100%;margin-top:6px">Mulai Kuis</button>
+<div class="note"><b>Ketentuan:</b> 30 soal pilihan ganda, setiap soal bernilai sama (skor maks. 100). Kuis hanya dapat dikerjakan <b>satu kali</b> per NIM. Setelah dikumpulkan, Anda akan melihat nilai, pembahasan, dan dapat menyimpan hasil ke PDF.</div>
+</section>
+
+<section id="quiz" class="card hide noprint">
+<div class="meta"><span id="who"></span><span id="cnt"></span></div>
+<div class="bar"><i id="pb"></i></div>
+<div class="q" id="qt"></div>
+<div id="opts"></div>
+<div class="nav">
+<button class="sec" id="prev">← Sebelumnya</button>
+<button class="pri" id="next">Selanjutnya →</button>
+<button class="org hide" id="fin">Kumpulkan Jawaban</button>
+</div>
+<div class="grid" id="grid"></div>
+</section>
+
+<section id="result" class="hide">
+<div class="card score">
+<div style="color:var(--navy);font-weight:700">HASIL KUIS FISIKA DASAR – MOMENTUM DAN IMPULS</div>
+<table class="id" style="margin-top:12px;text-align:left"><tr><td>Nama</td><td id="rn"></td></tr><tr><td>NIM</td><td id="rm"></td></tr><tr><td>Program Studi</td><td id="rp"></td></tr><tr><td>Waktu Pengumpulan</td><td id="rt"></td></tr></table>
+<div class="big" id="rs"></div><div class="lbl" id="rl"></div>
+<div class="stats"><div><b id="rb" style="color:var(--ok)"></b>Benar</div><div><b id="rw" style="color:var(--no)"></b>Salah</div><div><b id="rk"></b>Kosong</div></div>
+<div class="noprint"><button class="pri" onclick="window.print()">💾 Simpan ke PDF</button></div>
+<div class="note noprint" style="text-align:left">Pada jendela cetak, pilih <b>“Simpan sebagai PDF”</b> (Save as PDF) sebagai printer tujuan.</div>
+</div>
+<h2 style="color:var(--navy)">Pembahasan Soal</h2>
+<div id="rev"></div>
+</section>
+</main>
+
+<script>
+// Format: [soal, jawaban benar, salah1, salah2, salah3, pembahasan]
+const D=[
+["Momentum adalah besaran vektor yang dinyatakan dengan rumus …","p = m × v","p = F × Δt","p = m × a","p = ½ m v²","Momentum merupakan hasil kali massa dan kecepatan (p = m × v). Karena kecepatan adalah vektor, momentum juga vektor dengan arah sama seperti kecepatan."],
+["Satuan SI untuk momentum adalah …","kg·m/s","N·m","kg·m/s²","J/s","Dari p = m × v, satuannya kg × m/s = kg·m/s (setara dengan N·s)."],
+["Sebuah mobil bermassa 1.000 kg bergerak dengan kecepatan 20 m/s. Momentum mobil tersebut adalah …","20.000 kg·m/s","2.000 kg·m/s","200 kg·m/s","50 kg·m/s","p = m × v = 1.000 × 20 = 20.000 kg·m/s, bernilai positif karena searah gerak mobil."],
+["Sebuah forklift bermassa 1.500 kg melaju 4 m/s di dalam gudang. Momentum forklift tersebut adalah …","6.000 kg·m/s","375 kg·m/s","1.504 kg·m/s","600 kg·m/s","p = m × v = 1.500 × 4 = 6.000 kg·m/s."],
+["Sebuah benda yang diam memiliki momentum …","nol, karena kecepatannya nol","sebesar m × g","tak hingga","bergantung pada massanya saja","Benda diam memiliki v = 0 sehingga p = m × 0 = 0, berapa pun massanya."],
+["Mengapa truk besar yang melaju cepat jauh lebih sulit dihentikan daripada sepeda motor?","Massa truk jauh lebih besar sehingga momentumnya jauh lebih besar","Truk selalu bergerak lebih lambat sehingga momentumnya nol","Momentum tidak bergantung pada massa","Sepeda motor tidak memiliki momentum","Karena p = m × v, massa truk yang sangat besar membuat momentumnya besar. Untuk menghentikannya dibutuhkan impuls yang besar pula."],
+["Impuls didefinisikan sebagai …","hasil kali gaya dengan selang waktu gaya bekerja (I = F × Δt)","hasil kali massa dengan kecepatan","hasil bagi gaya dengan waktu","hasil kali massa dengan percepatan","Impuls adalah hasil kali gaya (F) dan selang waktu kerja gaya (Δt): I = F × Δt, dengan satuan N·s."],
+["Sebuah mesin stamping memberikan gaya 500 N pada lempengan baja selama 0,4 detik. Besar impuls yang diberikan adalah …","200 N·s","1.250 N·s","20 N·s","2.000 N·s","I = F × Δt = 500 × 0,4 = 200 N·s."],
+["Pada grafik gaya (F) terhadap waktu (t), besar impuls sama dengan …","luas area di bawah kurva","kemiringan (gradien) kurva","titik potong kurva dengan sumbu t","nilai gaya maksimum","Luas daerah di bawah kurva F–t adalah impuls. Untuk gaya konstan, luasnya berupa persegi panjang: I = F(t₁ − t₀) = FΔt."],
+["Gaya konstan 20 N bekerja pada sebuah benda selama 5 detik. Impuls yang diterima benda adalah …","100 N·s","4 N·s","25 N·s","0,25 N·s","I = F × Δt = 20 × 5 = 100 N·s."],
+["Pernyataan yang tepat tentang teorema impuls-momentum adalah …","impuls total pada benda sama dengan perubahan momentumnya (I = Δp)","impuls sama dengan momentum awal benda","momentum benda selalu nol setelah diberi gaya","impuls sama dengan energi kinetik benda","Teorema impuls-momentum: I = Δp atau FΔt = p₂ − p₁. Impuls total yang diberikan sama persis dengan perubahan momentum benda."],
+["Teorema impuls-momentum diturunkan dari …","Hukum II Newton (F = m·Δv/Δt)","Hukum I Newton","Hukum III Newton","Hukum Gravitasi Newton","Dari F = m(Δv/Δt), dikalikan silang menjadi FΔt = mΔv, yaitu I = Δp."],
+["Benda 2 kg bergerak 20 m/s, lalu diberi gaya searah 50 N selama 0,2 detik. Momentum akhir benda adalah …","50 kg·m/s","40 kg·m/s","10 kg·m/s","60 kg·m/s","p₁ = 2 × 20 = 40; I = 50 × 0,2 = 10; p₂ = p₁ + I = 40 + 10 = 50 kg·m/s. Nilai impuls (10) sama dengan perubahan momentum (10)."],
+["Sebuah bola 0,5 kg yang diam ditendang dengan gaya 100 N selama 0,1 detik. Kecepatan bola sesaat setelah ditendang adalah …","20 m/s","10 m/s","5 m/s","50 m/s","I = 100 × 0,1 = 10 N·s. I = Δp = m·v − 0 sehingga v = 10 / 0,5 = 20 m/s."],
+["Produk elektronik 3 kg bergerak 2 m/s dan menghantam stopper keras hingga berhenti dalam 0,03 detik. Besar gaya yang bekerja pada produk adalah …","200 N","6 N","180 N","2.000 N","Δp = 3 × (0 − 2) = −6 kg·m/s. F = Δp/Δt = −6/0,03 = −200 N, sehingga besarnya 200 N (tanda negatif menunjukkan arah berlawanan gerak)."],
+["Pada kasus nomor sebelumnya, waktu henti diperpanjang menjadi 0,15 detik dengan bantalan (soft stop). Besar gaya yang bekerja menjadi …","40 N","200 N","6 N","80 N","F = Δp/Δt = −6/0,15 = −40 N, sehingga besarnya 40 N."],
+["Jika waktu tumbukan diperpanjang 5 kali lipat untuk perubahan momentum yang sama, gaya rata-rata yang bekerja akan …","berkurang 80%","berkurang 20%","berkurang 50%","bertambah 5 kali lipat","Karena F = Δp/Δt, gaya berbanding terbalik dengan waktu. Waktu 5× lebih lama berarti gaya menjadi 1/5 (turun 80%)."],
+["Produk 2 kg jatuh dari conveyor dengan kecepatan 6 m/s dan membentur lantai berbantalan hingga berhenti dalam 0,1 detik. Gaya rata-rata yang diterima produk adalah …","120 N","12 N","60 N","1.200 N","Δp = 2 × (0 − 6) = −12 kg·m/s. F = Δp/Δt = −12/0,1 = −120 N, besarnya 120 N."],
+["Prinsip kerja airbag dalam mengurangi cedera penumpang adalah …","memperpanjang waktu perlambatan tubuh sehingga gaya benturan mengecil","memperbesar momentum penumpang","mempersingkat waktu tumbukan","menambah kecepatan mobil","Perubahan momentum penumpang tetap, tetapi airbag memperpanjang Δt sehingga F = Δp/Δt menjadi lebih kecil."],
+["Penjaga gawang menarik tangan ke belakang saat menangkap bola agar …","waktu kontak lebih lama sehingga gaya pada tangan berkurang","momentum bola bertambah","massa bola menjadi lebih kecil","waktu kontak lebih singkat sehingga bola cepat berhenti","Memperlama waktu kontak (Δt) membuat gaya rata-rata pada tangan lebih kecil untuk perubahan momentum bola yang sama."],
+["Hukum kekekalan momentum berlaku pada suatu sistem apabila …","tidak ada gaya luar yang bekerja pada sistem","benda selalu bergerak ke satu arah","massa benda-benda yang bertumbukan sama","berlaku selalu, apa pun gaya luarnya","Momentum total sebelum dan sesudah tumbukan sama jika tidak ada gaya luar (resultan gaya luar nol)."],
+["Momentum total sistem kekal saat dua benda bertumbukan karena …","gaya aksi-reaksi sama besar berlawanan arah (F_AB = −F_BA) sehingga I_A = −I_B","energi kinetik selalu tetap","kedua benda selalu bermassa sama","benda yang bertumbukan berhenti seketika","Menurut Hukum III Newton, F_AB = −F_BA dengan waktu kontak sama, sehingga I_A = −I_B. Perubahan momentum A dibatalkan perubahan momentum B."],
+["Benda A (2 kg) bergerak ke kanan 4 m/s dan benda B (3 kg) bergerak ke kiri 2 m/s. Jika arah kanan positif, momentum total sistem adalah …","+2 kg·m/s","+14 kg·m/s","−2 kg·m/s","0 kg·m/s","p_A = 2 × 4 = +8; p_B = 3 × (−2) = −6. p total = 8 − 6 = +2 kg·m/s (ke kanan). Arah kecepatan sangat krusial."],
+["Benda A (2 kg) bergerak 3 m/s menumbuk benda B (1 kg) yang diam, lalu keduanya menyatu. Kecepatan gabungan keduanya adalah …","2 m/s","3 m/s","1 m/s","6 m/s","Kekekalan momentum: 2(3) + 1(0) = (2 + 1)v′, sehingga 6 = 3v′ dan v′ = 2 m/s."],
+["Sebuah alat diam tiba-tiba pecah menjadi dua bagian bermassa 1 : 3. Bagian kecil terpental ke kiri 30 m/s. Kecepatan bagian besar adalah …","10 m/s ke kanan","10 m/s ke kiri","90 m/s ke kanan","30 m/s ke kanan","p awal = 0 sehingga 0 = m₁v₁ + m₂v₂ = 1(−30) + 3(v₂). Maka 3v₂ = 30 dan v₂ = 10 m/s ke kanan."],
+["Benda diam pecah menjadi dua bagian bermassa 3 kg dan 2 kg. Bagian 3 kg bergerak ke kiri 4 m/s. Kecepatan bagian 2 kg adalah …","6 m/s ke kanan","6 m/s ke kiri","4 m/s ke kanan","12 m/s ke kanan","0 = 3(−4) + 2(v₂) sehingga 2v₂ = 12 dan v₂ = 6 m/s ke kanan."],
+["Roket dapat terdorong ke atas karena memanfaatkan …","hukum kekekalan momentum: gas disemburkan ke bawah sehingga roket terdorong ke atas","gaya gesek udara yang mendorong roket","Hukum Hooke pada pegas","gaya gravitasi saja","Gas disemburkan ke bawah (momentum ke bawah), sehingga agar momentum total tetap, roket memperoleh momentum ke atas."],
+["Sebuah benda bermomentum 20 kg·m/s dan bermassa 2 kg. Energi kinetiknya adalah …","100 J","200 J","400 J","10 J","Ek = p²/2m = 20² / (2 × 2) = 400/4 = 100 J."],
+["Dalam sektor logistik, manajemen impuls pada aliran barang di conveyor belt dilakukan dengan …","bantalan pengereman dan soft stopping","pile driver dan hammer mill","sensor gaya kontak pada gripper","bubble wrap dan foam penyerap energi","Pada logistik, momentum barang di conveyor dikelola dengan bantalan pengereman dan soft stopping agar gaya benturan kecil dan barang tidak rusak."],
+["Sebuah bola 0,2 kg datang dengan kecepatan 10 m/s menuju dinding lalu dipantulkan dengan kecepatan 10 m/s berlawanan arah. Besar perubahan momentum bola adalah …","4 kg·m/s","0 kg·m/s","2 kg·m/s","20 kg·m/s","Arah datang positif: p₁ = 0,2 × 10 = +2; p₂ = 0,2 × (−10) = −2. Δp = −2 − 2 = −4, sehingga besarnya 4 kg·m/s."]
+];
+const $=id=>document.getElementById(id);
+const KEY=n=>"fisdas10_"+n;
+let U={},qs=[],cur=0;
+
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function build(){qs=D.map(d=>{const o=shuffle([d[1],d[2],d[3],d[4]]);return{q:d[0],o,c:o.indexOf(d[1]),e:d[5],a:-1}})}
+function show(id){["start","quiz","result"].forEach(s=>$(s).classList.toggle("hide",s!==id));window.scrollTo(0,0)}
+function load(n){try{const r=localStorage.getItem(KEY(n));return r?JSON.parse(r):null}catch(e){return null}}
+function save(n,v){try{localStorage.setItem(KEY(n),JSON.stringify(v))}catch(e){}}
+
+$("go").onclick=()=>{
+  const nama=$("nama").value.trim(),nim=$("nim").value.trim().replace(/\s+/g,""),prodi=$("prodi").value;
+  if(nama.length<3)return $("err").textContent="Nama lengkap wajib diisi.";
+  if(!/^[0-9A-Za-z]{5,20}$/.test(nim))return $("err").textContent="NIM tidak valid (5–20 karakter huruf/angka).";
+  $("err").textContent="";
+  U={nama,nim,prodi};
+  const old=load(nim);
+  if(old){U=old.u;qs=old.qs;renderResult(old.t,true);return}
+  build();cur=0;$("who").textContent=nama+" · "+nim;show("quiz");renderQ();
+};
+
+function renderQ(){
+  const q=qs[cur],L="ABCD";
+  $("cnt").textContent="Soal "+(cur+1)+" dari "+qs.length;
+  $("pb").style.width=((cur+1)/qs.length*100)+"%";
+  $("qt").textContent=(cur+1)+". "+q.q;
+  $("opts").innerHTML="";
+  q.o.forEach((t,i)=>{const b=document.createElement("button");b.className="opt"+(q.a===i?" sel":"");b.textContent=L[i]+". "+t;
+    b.onclick=()=>{q.a=i;renderQ()};$("opts").appendChild(b)});
+  $("prev").disabled=cur===0;
+  const last=cur===qs.length-1;
+  $("next").classList.toggle("hide",last);$("fin").classList.toggle("hide",!last);
+  $("grid").innerHTML="";
+  qs.forEach((x,i)=>{const b=document.createElement("button");b.textContent=i+1;
+    b.className=(x.a>=0?"done ":"")+(i===cur?"now":"");b.onclick=()=>{cur=i;renderQ()};$("grid").appendChild(b)});
+}
+$("prev").onclick=()=>{if(cur>0){cur--;renderQ()}};
+$("next").onclick=()=>{if(cur<qs.length-1){cur++;renderQ()}};
+$("fin").onclick=()=>{
+  const k=qs.filter(x=>x.a<0).length;
+  if(!confirm(k?("Masih ada "+k+" soal belum dijawab. Yakin ingin mengumpulkan?"):"Kumpulkan jawaban sekarang? Jawaban tidak dapat diubah lagi."))return;
+  const t=new Date().toLocaleString("id-ID",{dateStyle:"full",timeStyle:"short"});
+  save(U.nim,{u:U,qs,t});renderResult(t,false);
+};
+
+function renderResult(t,again){
+  const b=qs.filter(x=>x.a===x.c).length,k=qs.filter(x=>x.a<0).length,w=qs.length-b-k;
+  const s=Math.round(b/qs.length*100);
+  $("rn").textContent=U.nama;$("rm").textContent=U.nim;$("rp").textContent=U.prodi;$("rt").textContent=t;
+  $("rs").textContent=s;$("rb").textContent=b;$("rw").textContent=w;$("rk").textContent=k;
+  $("rl").textContent=s>=85?"Sangat Baik":s>=70?"Baik":s>=55?"Cukup":"Perlu Belajar Lagi";
+  const L="ABCD";
+  $("rev").innerHTML=qs.map((x,i)=>{
+    const ok=x.a===x.c;
+    return '<div class="rv '+(ok?"ok":"no")+'"><div class="t">'+(i+1)+". "+x.q+'</div>'+
+    '<div class="a">Jawaban Anda: '+(x.a<0?"<i>(tidak dijawab)</i>":L[x.a]+". "+x.o[x.a])+' <span class="tag">'+(ok?"✔ Benar":"✘ "+(x.a<0?"Kosong":"Salah"))+'</span></div>'+
+    (ok?"":'<div class="a">Jawaban benar: <b>'+L[x.c]+". "+x.o[x.c]+'</b></div>')+
+    '<div class="exp"><b>Pembahasan:</b> '+x.e+'</div></div>'}).join("");
+  show("result");
+  if(again)alert("NIM ini sudah pernah mengerjakan kuis. Menampilkan hasil yang tersimpan.");
+}
+</script>
+</body>
+</html>
